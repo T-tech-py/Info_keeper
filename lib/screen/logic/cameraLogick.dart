@@ -16,10 +16,10 @@ class _CameraAppState extends State<CameraApp> {
   void initState() {
     super.initState();
     controller = CameraController(
-        CameraDescription(
+        const CameraDescription(
             name: 'main',
             lensDirection: CameraLensDirection.back,
-            sensorOrientation: 1),
+            sensorOrientation: 0),
         ResolutionPreset.max);
     controller.initialize().then((_) {
       if (!mounted) {
@@ -31,7 +31,7 @@ class _CameraAppState extends State<CameraApp> {
 
   @override
   void dispose() {
-    controller?.dispose();
+    controller.dispose();
     super.dispose();
   }
 

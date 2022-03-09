@@ -19,6 +19,7 @@ class EditInfoView extends StatefulWidget {
 
 class _EditInfoViewState extends State<EditInfoView> {
   TextEditingController discriptionText = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     discriptionText.text = 938429728792.toString();

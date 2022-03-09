@@ -46,7 +46,7 @@ class Recent extends StatelessWidget {
                 mainAxisSpacing: 10.0,
               ),
               itemBuilder: (BuildContext context, int index) {
-                return File(
+                return MyFile(
                   title: "My NIN",
                   onTap: () {
                     Navigator.pushNamed(context, '/infoView');

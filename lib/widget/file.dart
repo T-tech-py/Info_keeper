@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:info_keeper/const/colors.dart';
 
-class File extends StatelessWidget {
-  const File({Key? key, required this.title, required this.onTap})
+class MyFile extends StatelessWidget {
+  const MyFile({Key? key, required this.title, required this.onTap})
       : super(key: key);
   final String title;
   final VoidCallback onTap;

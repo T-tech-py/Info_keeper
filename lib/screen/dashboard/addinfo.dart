@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:camera/camera.dart';
 import 'package:file/local.dart';
 import 'package:flutter/services.dart';
 import 'package:another_audio_recorder/another_audio_recorder.dart';
@@ -20,8 +21,8 @@ import 'package:info_keeper/widget/formField.dart';
 import 'dart:async';
 import 'dart:io' as io;
 import 'dart:core';
-import 'package:rxdart/rxdart.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddNewFile extends StatefulWidget {
   final LocalFileSystem localFileSystem;
@@ -40,7 +41,8 @@ class _AddNewFileState extends State<AddNewFile>
   Recording? _current;
   RecordingStatus _currentStatus = RecordingStatus.Unset;
   AudioPlayer audioPlayer = AudioPlayer();
-  //late Stream<DurationState> _durationState;
+  final _picker = ImagePicker();
+  late File _imageFile;
   @override
   void initState() {
     // TODO: implement initState
@@ -114,10 +116,23 @@ class _AddNewFileState extends State<AddNewFile>
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.attach_file)),
+                    onPressed: () async {
+                      final image =
+                          await _picker.pickImage(source: ImageSource.gallery);
+                      if (image != null) {
+                        setState(() {
+                          this._imageFile = File(image.path);
+                        });
+                      }
+                    },
+                    icon: const Icon(Icons.attach_file)),
                 IconButton(
-                    onPressed: () {
-                      navigate(context, CameraApp());
+                    onPressed: () async {
+                      // Capture a photo
+                      final XFile? photo =
+                          await _picker.pickImage(source: ImageSource.camera);
+
+                      // navigate(context, CameraApp());
                     },
                     icon: const Icon(Icons.camera_alt_outlined)),
                 GestureDetector(
@@ -139,6 +154,10 @@ class _AddNewFileState extends State<AddNewFile>
                       default:
                         break;
                     }
+                  },
+                  onTap: () {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text("Hold button to start recording")));
                   },
                   onLongPressEnd: (LongPressEndDetails onLongPressEnd) =>
                       _stop(),
