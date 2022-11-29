@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "424244908879",
+    "project_id": "info-keeper-af2e9",
+    "storage_bucket": "info-keeper-af2e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424244908879:android:c29f30cf967cf626bc6b3a",
+        "android_client_info": {
+          "package_name": "com.example.info_keeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424244908879-c6shs3elnv52uh7l2kh5cqmsngqqgads.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPUKXu3X-n14UTG38_HpUf6IUHsYDDTjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424244908879-c6shs3elnv52uh7l2kh5cqmsngqqgads.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

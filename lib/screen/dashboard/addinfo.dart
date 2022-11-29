@@ -12,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_viewer/image_viewer.dart';
 import 'package:info_keeper/const/colors.dart';
 import 'package:info_keeper/router/navigators.dart';
 import 'package:info_keeper/screen/logic/cameraLogick.dart';
@@ -43,17 +44,13 @@ class _AddNewFileState extends State<AddNewFile>
   AudioPlayer audioPlayer = AudioPlayer();
   final _picker = ImagePicker();
   late File _imageFile;
+  List<File> all_photos = [];
+  List<String> all_photos_view = [];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _init();
-    // _durationState = Rx.combineLatest2<Duration>(
-    //     audioPlayer.onAudioPositionChanged.,
-    //     audioPlayer.onPlayerStateChanged,
-    //     (position, playback) => DurationState(
-    //           progress: position,
-    //         ));
 
     _controller =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
@@ -112,6 +109,46 @@ class _AddNewFileState extends State<AddNewFile>
               controller: discriptionText,
             ),
             SizedBox(height: 25.h),
+            if (all_photos.isNotEmpty)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Images",
+                    style: GoogleFonts.josefinSans(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: black,
+                    ),
+                  ),
+                  SizedBox(height: 18.h),
+                  SizedBox(
+                    height: 150.h,
+                    child: ListView.builder(
+                        itemCount: all_photos.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext, int) {
+                          return Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                ImageViewer.showImageSlider(
+                                  images: all_photos_view,
+                                );
+                              },
+                              child: Container(
+                                height: 90.h,
+                                width: 90.h,
+                                color: Colors.grey,
+                                child: Image.file(all_photos[int]),
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
+                ],
+              ),
+            SizedBox(height: 18.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -122,6 +159,8 @@ class _AddNewFileState extends State<AddNewFile>
                       if (image != null) {
                         setState(() {
                           this._imageFile = File(image.path);
+                          all_photos.add(_imageFile);
+                          all_photos_view.add(image.path);
                         });
                       }
                     },
@@ -131,6 +170,13 @@ class _AddNewFileState extends State<AddNewFile>
                       // Capture a photo
                       final XFile? photo =
                           await _picker.pickImage(source: ImageSource.camera);
+                      if (photo != null) {
+                        setState(() {
+                          this._imageFile = File(photo.path);
+                          all_photos.add(_imageFile);
+                          all_photos_view.add(photo.name);
+                        });
+                      }
 
                       // navigate(context, CameraApp());
                     },

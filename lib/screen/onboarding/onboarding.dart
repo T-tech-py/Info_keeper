@@ -31,7 +31,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: PageView(
                 controller: _pageController,
                 onPageChanged: (pageIndex) {
-                  _currentPage = pageIndex;
+                  setState(() {
+                    _currentPage = pageIndex;
+                  });
                 },
                 children: const [
                   IntroView(
@@ -116,6 +118,7 @@ class Indicator extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(length, (index) {
           if (index == activeIndex) {
+            print(activeIndex);
             return Container(
               height: 7.h,
               width: 15.w,
