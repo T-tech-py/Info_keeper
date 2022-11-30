@@ -56,6 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               CustomTextField(
                 label: 'Phone Number',
                 hintText: '',
+                inputType: TextInputType.number,
               ),
               SizedBox(height: 32.h),
               CustomTextField(

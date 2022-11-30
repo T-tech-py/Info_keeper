@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:info_keeper/const/app_bar.dart';
 import 'package:info_keeper/const/colors.dart';
+import 'package:info_keeper/const/sizedbox.dart';
 import 'package:info_keeper/widget/button.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +24,7 @@ class _ForgetPin2State extends State<ForgetPin2> {
 
   BoxDecoration get _pinPutDecoration {
     return BoxDecoration(
-      color: primaryColor.withOpacity(0.3),
+      color: bodyColor,
       border: Border.all(color: primaryColor),
       borderRadius: BorderRadius.circular(15.0),
     );
@@ -42,105 +44,109 @@ class _ForgetPin2State extends State<ForgetPin2> {
       ),
       backgroundColor: Colors.blue,
     );
-    Scaffold.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(snackBar);
+    // Scaffold.of(context)
+    //   ..hideCurrentSnackBar()
+    //   ..showSnackBar(snackBar);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar(context, ""),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Center(
-          child: ListView(
-            children: [
-              SizedBox(height: 20.h),
-              Text(
-                'Pin Reset',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.josefinSans(
-                  color: primaryColor,
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.w600,
+        child: ListView(
+          children: [
+            ySize(40),
+            Text(
+              'Infokeeper',
+              style: GoogleFonts.josefinSans(
+                color: primaryColor,
+                fontSize: 40.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            ySize(40),
+            Text(
+              'Enter OTP',
+              textAlign: TextAlign.start,
+              style: GoogleFonts.josefinSans(
+                color: black,
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            ySize(8),
+            Text(
+              'Enter the 4 digits OTP code received on your phone 0703****311',
+              textAlign: TextAlign.start,
+              style: GoogleFonts.josefinSans(
+                color: black2,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            ySize(36),
+            SizedBox(
+              height: 62.h,
+              child: PinPut(
+                eachFieldWidth: 62,
+                fieldsCount: 4,
+                onSubmit: (String pin) => _showSnackBar(pin, context),
+                focusNode: _pinPutFocusNode,
+                controller: otp,
+                submittedFieldDecoration: _pinPutDecoration.copyWith(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                selectedFieldDecoration: _pinPutDecoration,
+                followingFieldDecoration: _pinPutDecoration.copyWith(
+                  borderRadius: BorderRadius.circular(5.0),
+                  border: Border.all(
+                    color: primaryColor.withOpacity(0.65),
+                  ),
                 ),
               ),
-              SizedBox(height: 22.h),
-              Text(
-                'An OTP has been sent to your email address. Kindly enter it to reset your password',
-                textAlign: TextAlign.center,
-                style: GoogleFonts.josefinSans(
-                  color: black,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w500,
+            ),
+            ySize(40),
+            LoginButton(
+                text: 'Submit',
+                onPressed: () {
+                  Navigator.pushNamed(context, '/newPin');
+                },
+                isLogin: true),
+            ySize(16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Didn’t get otp? ',
+                  style: GoogleFonts.josefinSans(
+                      color: black2,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400),
                 ),
-              ),
-              SizedBox(height: 32.h),
-              SizedBox(
-                height: 70.h,
-                child: PinPut(
-                  fieldsCount: 5,
-                  onSubmit: (String pin) => _showSnackBar(pin, context),
-                  focusNode: _pinPutFocusNode,
-                  controller: otp,
-                  submittedFieldDecoration: _pinPutDecoration.copyWith(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  selectedFieldDecoration: _pinPutDecoration,
-                  followingFieldDecoration: _pinPutDecoration.copyWith(
-                    borderRadius: BorderRadius.circular(5.0),
-                    border: Border.all(
-                      color: black.withOpacity(0.5),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 60.h),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  LoginButton(
-                      text: 'Submit',
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/newPin');
-                      },
-                      isLogin: true),
-                ],
-              ),
-              SizedBox(height: 20.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Didn’t get otp? ',
-                    style: GoogleFonts.josefinSans(
-                        color: black.withOpacity(0.4),
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) => Center(
-                                  child: SizedBox(
-                                      height: 60.h,
-                                      width: 60.h,
-                                      child: CircularProgressIndicator()),
-                                ));
-                      },
-                      child: Text(
-                        'Resend',
-                        style: GoogleFonts.josefinSans(
-                            color: primaryColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
-                      )),
-                ],
-              ),
-              SizedBox(height: 140.h),
-            ],
-          ),
+                TextButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => Center(
+                                child: SizedBox(
+                                    height: 60.h,
+                                    width: 60.h,
+                                    child: CircularProgressIndicator()),
+                              ));
+                    },
+                    child: Text(
+                      'Resend',
+                      style: GoogleFonts.josefinSans(
+                          color: primaryColor,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400),
+                    )),
+              ],
+            ),
+            SizedBox(height: 140.h),
+          ],
         ),
       ),
     );

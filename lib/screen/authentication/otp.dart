@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:info_keeper/const/app_bar.dart';
 import 'package:info_keeper/const/colors.dart';
+import 'package:info_keeper/const/sizedbox.dart';
 import 'package:info_keeper/widget/button.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +24,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
   BoxDecoration get _pinPutDecoration {
     return BoxDecoration(
-      color: primaryColor.withOpacity(0.3),
+      color: bodyColor,
       border: Border.all(color: primaryColor),
       borderRadius: BorderRadius.circular(15.0),
     );
@@ -47,11 +49,12 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar(context, ""),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: ListView(
           children: [
-            SizedBox(height: 84.h),
+            ySize(40),
             Text(
               'Infokeeper',
               style: GoogleFonts.josefinSans(
@@ -60,33 +63,32 @@ class _OtpScreenState extends State<OtpScreen> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 32.h),
-            SvgPicture.asset('assets/image/svg/otpVerify.svg'),
-            SizedBox(height: 42.h),
+            ySize(40),
             Text(
-              'Verify your Account',
-              textAlign: TextAlign.center,
+              'Verify Your Account.',
+              textAlign: TextAlign.start,
               style: GoogleFonts.josefinSans(
-                color: primaryColor,
+                color: black,
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 22.h),
+            ySize(8),
             Text(
-              'Kindly verify your email address by entering the OTP sent to your phone number',
-              textAlign: TextAlign.center,
+              'Enter the 4 digits OTP code received on your phone 0703****311',
+              textAlign: TextAlign.start,
               style: GoogleFonts.josefinSans(
-                color: black,
+                color: black2,
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 32.h),
+            ySize(36),
             SizedBox(
-              height: 70.h,
+              height: 62.h,
               child: PinPut(
-                fieldsCount: 5,
+                eachFieldWidth: 62,
+                fieldsCount: 4,
                 onSubmit: (String pin) => _showSnackBar(pin, context),
                 focusNode: _pinPutFocusNode,
                 controller: otp,
@@ -97,17 +99,17 @@ class _OtpScreenState extends State<OtpScreen> {
                 followingFieldDecoration: _pinPutDecoration.copyWith(
                   borderRadius: BorderRadius.circular(5.0),
                   border: Border.all(
-                    color: black.withOpacity(0.5),
+                    color: primaryColor.withOpacity(0.65),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 60.h),
+            ySize(40),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 LoginButton(
-                    text: 'Submit',
+                    text: 'CONTINUE',
                     onPressed: () {
                       showModalBottomSheet(
                           backgroundColor: Colors.transparent,
@@ -143,6 +145,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                     LoginButton(
                                       text: "Proceed to dasboard",
                                       onPressed: () {
+                                        Navigator.pop(context);
                                         Navigator.pushNamed(
                                             context, "/landing");
                                       },

@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:info_keeper/const/colors.dart';
+import 'package:info_keeper/const/sizedbox.dart';
 import 'package:info_keeper/widget/button.dart';
+import '../../widget/onboarding_widgets/indicator.dart';
+import '../../widget/onboarding_widgets/intro_view.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -20,14 +21,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bodyColor,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 170.h),
-            SizedBox(
-              height: 447.h,
+            ySize(170),
+            Expanded(
               child: PageView(
                 controller: _pageController,
                 onPageChanged: (pageIndex) {
@@ -73,7 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 25.h),
+            ySize(25),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -95,94 +96,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 15.h),
+            ySize(15),
             Indicator(length: 3, activeIndex: _currentPage),
-            SizedBox(height: 50.h),
+            ySize(50),
           ],
         ),
       ),
-    );
-  }
-}
-
-class Indicator extends StatelessWidget {
-  final int length, activeIndex;
-  const Indicator({Key? key, required this.length, required this.activeIndex})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 50,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List.generate(length, (index) {
-          if (index == activeIndex) {
-            print(activeIndex);
-            return Container(
-              height: 7.h,
-              width: 15.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.r),
-                color: primaryColor,
-              ),
-            );
-          }
-          return Container(
-            height: 7.w,
-            width: 7.w,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: primaryColor.withAlpha(76),
-            ),
-          );
-        }),
-      ),
-    );
-  }
-}
-
-class IntroView extends StatelessWidget {
-  const IntroView(
-      {Key? key,
-      required this.imgLink,
-      required this.text1,
-      required this.text2})
-      : super(key: key);
-  final String imgLink;
-  final String text1;
-  final String text2;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SvgPicture.asset(
-          imgLink,
-          height: 280.h,
-          width: 310.w,
-        ),
-        SizedBox(height: 50.h),
-        Text(
-          text1,
-          textAlign: TextAlign.center,
-          style: GoogleFonts.lato(
-            color: primaryColor,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        SizedBox(height: 12.h),
-        Text(
-          text2,
-          textAlign: TextAlign.center,
-          style: GoogleFonts.lato(
-            color: black.withOpacity(0.7),
-            fontSize: 24,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ],
     );
   }
 }

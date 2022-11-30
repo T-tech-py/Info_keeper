@@ -15,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isNotVisible = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,11 +55,27 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomTextField(
                 label: 'Phone Number',
                 hintText: '+234 XXX XXX XXX',
+                inputType: TextInputType.number,
               ),
               SizedBox(height: 32.h),
               CustomTextField(
                 label: 'Pin',
                 hintText: 'XXXX',
+                obscure: isNotVisible,
+                surfix: IconButton(
+                  icon: Icon(
+                    isNotVisible ? Icons.visibility : Icons.visibility_off,
+                    color: black,
+                  ),
+                  onPressed: () {
+                    if (isNotVisible) {
+                      isNotVisible = !isNotVisible;
+                    } else {
+                      isNotVisible = !isNotVisible;
+                    }
+                    setState(() {});
+                  },
+                ),
               ),
               SizedBox(height: 10.h),
               Align(

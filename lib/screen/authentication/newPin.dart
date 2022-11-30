@@ -3,8 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:info_keeper/const/app_bar.dart';
 import 'package:info_keeper/const/colors.dart';
+import 'package:info_keeper/const/sizedbox.dart';
 import 'package:info_keeper/widget/button.dart';
+import 'package:info_keeper/widget/customTextField.dart';
 import 'package:info_keeper/widget/pinTextfield.dart';
 
 class PinReset extends StatefulWidget {
@@ -20,57 +23,87 @@ class _PinResetState extends State<PinReset> {
   TextEditingController confirmNewPin = TextEditingController();
 
   bool showPin = false;
+  bool showPin2 = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: appBar(context, ""),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 25.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
           children: [
+            ySize(40),
             Text(
-              'Change Pin',
-              textAlign: TextAlign.center,
+              'Infokeeper',
               style: GoogleFonts.josefinSans(
                 color: primaryColor,
+                fontSize: 40.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            ySize(40),
+            Text(
+              'Create New Pin.',
+              textAlign: TextAlign.start,
+              style: GoogleFonts.josefinSans(
+                color: black,
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 22.h),
-            PinTextField(
-                label: "New Pin",
-                onpress: () {
-                  if (showPin = false) {
-                    setState(() {
-                      showPin = true;
-                    });
-                  } else if (showPin = true) {
-                    setState(() {
-                      showPin = false;
-                    });
+            ySize(8),
+            Text(
+              'Set a new pin for your account so you can login and access'
+              ' your documents.',
+              textAlign: TextAlign.start,
+              style: GoogleFonts.josefinSans(
+                color: black2,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            ySize(72),
+            CustomTextField(
+              label: "New Pin",
+              hintText: "XXXX",
+              obscure: showPin,
+              surfix: IconButton(
+                icon: Icon(
+                  showPin ? Icons.visibility : Icons.visibility_off,
+                  color: black,
+                ),
+                onPressed: () {
+                  if (showPin) {
+                    showPin = !showPin;
+                  } else {
+                    showPin = !showPin;
                   }
+                  setState(() {});
                 },
-                controller: newPin,
-                isPasswordVisible: showPin),
-            SizedBox(height: 30.h),
-            PinTextField(
-                label: "New Pin",
-                onpress: () {
-                  if (showPin = false) {
-                    setState(() {
-                      showPin = true;
-                    });
-                  } else if (showPin = true) {
-                    setState(() {
-                      showPin = false;
-                    });
+              ),
+            ),
+            ySize(16),
+            CustomTextField(
+              label: "Confirm New Pin",
+              hintText: "XXXX",
+              obscure: showPin2,
+              surfix: IconButton(
+                icon: Icon(
+                  showPin2 ? Icons.visibility : Icons.visibility_off,
+                  color: black,
+                ),
+                onPressed: () {
+                  if (showPin) {
+                    showPin2 = !showPin2;
+                  } else {
+                    showPin2 = !showPin2;
                   }
+                  setState(() {});
                 },
-                controller: newPin,
-                isPasswordVisible: showPin),
-            SizedBox(height: 40.h),
+              ),
+            ),
+            ySize(40),
             LoginButton(text: "Change Pin", onPressed: () {}, isLogin: true)
           ],
         ),

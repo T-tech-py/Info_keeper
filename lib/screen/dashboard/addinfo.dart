@@ -15,7 +15,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_viewer/image_viewer.dart';
 import 'package:info_keeper/const/colors.dart';
 import 'package:info_keeper/router/navigators.dart';
-import 'package:info_keeper/screen/logic/cameraLogick.dart';
 import 'package:info_keeper/widget/button.dart';
 import 'package:info_keeper/widget/customTextField.dart';
 import 'package:info_keeper/widget/formField.dart';
@@ -202,8 +201,8 @@ class _AddNewFileState extends State<AddNewFile>
                     }
                   },
                   onTap: () {
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("Hold button to start recording")));
+                    // Scaffold.of(context).showSnackBar(SnackBar(
+                    //     content: Text("Hold button to start recording")));
                   },
                   onLongPressEnd: (LongPressEndDetails onLongPressEnd) =>
                       _stop(),
@@ -233,16 +232,16 @@ class _AddNewFileState extends State<AddNewFile>
                           );
                         }),
                   ),
-                FlatButton(
+                ElevatedButton(
                   onPressed:
                       _currentStatus != RecordingStatus.Unset ? _stop : null,
                   child: Text("Stop", style: TextStyle(color: Colors.white)),
-                  color: Colors.blueAccent.withOpacity(0.5),
+                  // color: Colors.blueAccent.withOpacity(0.5),
                 ),
-                FlatButton(
+                ElevatedButton(
                   onPressed: onPlayAudio,
                   child: Text("Play", style: TextStyle(color: Colors.white)),
-                  color: Colors.blueAccent.withOpacity(0.5),
+                  //color: Colors.blueAccent.withOpacity(0.5),
                 ),
               ],
             ),
@@ -289,8 +288,8 @@ class _AddNewFileState extends State<AddNewFile>
           print(_currentStatus);
         });
       } else {
-        Scaffold.of(context).showSnackBar(
-            SnackBar(content: Text("You must accept permissions")));
+        // Scaffold.of(context).showSnackBar(
+        //     SnackBar(content: Text("You must accept permissions")));
       }
     } catch (e) {
       print(e);
@@ -318,8 +317,8 @@ class _AddNewFileState extends State<AddNewFile>
           _currentStatus = _current!.status!;
         });
       });
-      Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text("You have started recording")));
+      // Scaffold.of(context)
+      //     .showSnackBar(SnackBar(content: Text("You have started recording")));
     } catch (e) {
       print(e);
     }
