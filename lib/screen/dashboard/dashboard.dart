@@ -5,8 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:info_keeper/const/colors.dart';
+import 'package:info_keeper/const/sizedbox.dart';
 import 'package:info_keeper/mixins/dashboardMixins.dart';
 import 'package:info_keeper/widget/customTextField.dart';
+
+enum View { vertical, horizontal }
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -16,6 +19,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  var appView = View.horizontal;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +27,7 @@ class _DashboardState extends State<Dashboard> {
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: ListView(
           children: [
-            SizedBox(height: 90.h),
+            ySize(46),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -36,15 +40,27 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 GestureDetector(
-                    onTap: () {},
-                    child: SvgPicture.asset("assets/image/svg/arrange.svg"))
+                    onTap: () {
+                      if (appView == View.horizontal) {
+                        appView = View.vertical;
+                      } else if (appView == View.vertical) {
+                        appView = View.horizontal;
+                      }
+                      setState(() {});
+                    },
+                    child: SvgPicture.asset(
+                      appView == View.horizontal
+                          ? "assets/image/svg/vertical.svg"
+                          : "assets/image/svg/arrange.svg",
+                      color: primaryColor,
+                    ))
               ],
             ),
-            SizedBox(height: 24.h),
+            ySize(20),
             CustomTextField(label: '', hintText: 'Search for your Info'),
-            SizedBox(height: 32.h),
-            Dassboardlogic().fileHandler(context),
-            SizedBox(height: 100.h),
+            ySize(24),
+            Dassboardlogic().fileHandler(context, appView),
+            ySize(100),
           ],
         ),
       ),

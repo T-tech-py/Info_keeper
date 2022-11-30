@@ -11,11 +11,13 @@ class CustomFormField extends StatelessWidget {
     required this.hintText,
     Key? key,
     required this.controller,
+    this.enable,
   }) : super(key: key);
 
   final String label;
   final String hintText;
   final TextEditingController controller;
+  final bool? enable;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class CustomFormField extends StatelessWidget {
         SizedBox(
           height: 147.h,
           child: TextField(
+            enabled: enable ?? true,
             controller: controller,
             readOnly: true,
             maxLines: 147,

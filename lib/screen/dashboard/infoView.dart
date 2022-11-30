@@ -6,6 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:info_keeper/const/colors.dart';
+import 'package:info_keeper/const/sizedbox.dart';
+import 'package:info_keeper/router/navigators.dart';
+import 'package:info_keeper/screen/dashboard/view_image.dart';
 import 'package:info_keeper/widget/button.dart';
 import 'package:info_keeper/widget/customTextField.dart';
 import 'package:info_keeper/widget/formField.dart';
@@ -48,23 +51,6 @@ class _InfoViewState extends State<InfoView> {
           ),
         ),
         actions: [
-          // PopupMenuButton(itemBuilder: ((_)=>[
-
-          //   PopupMenuItem(child: Row(
-          //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //                     children: [
-          //                       SvgPicture.asset('assets/image/svg/edit.svg'),
-          //                       Text(
-          //                         "Edit",
-          //                         style: GoogleFonts.josefinSans(
-          //                           fontSize: 14.sp,
-          //                           fontWeight: FontWeight.w400,
-          //                           color: black,
-          //                         ),
-          //                       ),
-          //                     ])),
-
-          // ])),
           GestureDetector(
               onTap: () {
                 showMenu(
@@ -128,15 +114,20 @@ class _InfoViewState extends State<InfoView> {
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: ListView(
           children: [
-            SizedBox(height: 56.h),
-            CustomTextField(label: 'Title', hintText: "My Nin"),
-            SizedBox(height: 24.h),
+            ySize(56),
+            CustomTextField(
+              label: 'Title',
+              hintText: "My Nin",
+              enable: false,
+            ),
+            ySize(24),
             CustomFormField(
               label: "Description",
               hintText: '72728172811',
               controller: discriptionText,
+              enable: false,
             ),
-            SizedBox(height: 24.h),
+            ySize(24),
             Text(
               "Images",
               style: GoogleFonts.josefinSans(
@@ -145,24 +136,27 @@ class _InfoViewState extends State<InfoView> {
                 color: black,
               ),
             ),
-            SizedBox(height: 18.h),
+            ySize(18),
             SizedBox(
               height: 150.h,
               child: ListView.builder(
                   itemCount: 5,
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext, int) {
+                  itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Container(
-                        height: 90.h,
-                        width: 90.h,
-                        color: Colors.grey,
+                      child: GestureDetector(
+                        onTap: () => navigate(context, ViewPicture()),
+                        child: Container(
+                          height: 90.h,
+                          width: 90.h,
+                          color: Colors.grey,
+                        ),
                       ),
                     );
                   }),
             ),
-            SizedBox(height: 18.h),
+            ySize(18),
             Text(
               "Audio ",
               style: GoogleFonts.josefinSans(
@@ -171,7 +165,7 @@ class _InfoViewState extends State<InfoView> {
                 color: black,
               ),
             ),
-            SizedBox(height: 18.h),
+            ySize(18),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -198,9 +192,9 @@ class _InfoViewState extends State<InfoView> {
                 ),
               ],
             ),
-            SizedBox(height: 40.h),
+            ySize(40),
             LoginButton(text: "Close", onPressed: () {}, isLogin: true),
-            SizedBox(height: 44.h),
+            ySize(44),
           ],
         ),
       ),

@@ -16,7 +16,9 @@ class FileDeleted extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(child: SvgPicture.asset('assets/image/svg/bins.svg')),
+            Center(child: Icon(Icons.delete)
+                //SvgPicture.asset('assets/image/svg/bins.svg')
+                ),
             Text(
               "File successfully Deleted.",
               textAlign: TextAlign.center,

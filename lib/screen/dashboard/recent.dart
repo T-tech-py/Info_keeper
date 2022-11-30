@@ -51,6 +51,7 @@ class Recent extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(context, '/infoView');
                   },
+                  isVertical: false,
                 );
               }),
         ),

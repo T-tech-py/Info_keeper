@@ -14,6 +14,7 @@ import 'package:info_keeper/screen/dashboard/infoView.dart';
 import 'package:info_keeper/screen/dashboard/landing.dart';
 import 'package:info_keeper/screen/dashboard/recent.dart';
 import 'package:info_keeper/screen/onboarding/onboarding.dart';
+import 'package:info_keeper/screen/profile/profile.dart';
 
 import '../screen/authentication/signup.dart';
 
@@ -40,6 +41,8 @@ class AppRouting {
         return MaterialPageRoute(builder: (_) => Dashboard());
       case '/recent':
         return MaterialPageRoute(builder: (_) => Recent());
+      case '/profile':
+        return MaterialPageRoute(builder: (_) => Profile());
       case '/infoView':
         return MaterialPageRoute(builder: (_) => InfoView());
       case '/editinfoView':

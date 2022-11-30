@@ -12,14 +12,17 @@ class CustomTextField extends StatelessWidget {
     this.obscure,
     this.prefix,
     this.surfix,
+    this.enable,
   }) : super(key: key);
 
   final String label;
   final String hintText;
   final TextInputType? inputType;
   final bool? obscure;
+  final bool? enable;
   final Widget? prefix;
   final Widget? surfix;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,6 +42,7 @@ class CustomTextField extends StatelessWidget {
         SizedBox(
           height: 49.h,
           child: TextField(
+            enabled: enable ?? true,
             obscureText: obscure ?? false,
             keyboardType: inputType ?? TextInputType.text,
             decoration: kDecoration.copyWith(

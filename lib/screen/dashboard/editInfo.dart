@@ -60,6 +60,7 @@ class _EditInfoViewState extends State<EditInfoView> {
               label: "Description",
               hintText: '72728172811',
               controller: discriptionText,
+              enable: true,
             ),
             SizedBox(height: 24.h),
             Text(

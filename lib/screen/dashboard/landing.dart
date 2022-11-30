@@ -134,7 +134,7 @@ class _LandingScreenState extends State<LandingScreen> {
                           setState(() {
                             key = "profile";
                           });
-                          firstKey.currentState!.pushNamed('/dashboard',
+                          firstKey.currentState!.pushNamed('/profile',
                               arguments: (route) => false);
                         },
                         color: key == "profile" ? primaryColor : black,
