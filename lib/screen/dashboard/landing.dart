@@ -47,103 +47,101 @@ class _LandingScreenState extends State<LandingScreen> {
   var key = 'dashboard';
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        drawerEnableOpenDragGesture: false,
-        body: _buildBody(),
-        bottomNavigationBar: BottomAppBar(
-          notchMargin: 6.0,
-          // shape: const CircularNotchedRectangle(),
-          color: Color(0xffF6FAFE),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 50.w),
-            height: 79.h,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Builder(builder: (context) {
-                  return Stack(
-                    alignment: Alignment.topLeft,
-                    children: [
-                      if (key == "dashboard")
-                        Container(
-                          height: 2.h,
-                          width: 36.w,
-                          color: primaryColor,
-                        ),
-                      CustomNavItem(
-                        icon: key == "dashboard"
-                            ? "assets/image/svg/home.svg"
-                            : "assets/image/svg/unfillhome.svg",
-                        label: 'Home',
-                        onTap: () {
-                          firstKey.currentState!.pushNamed('/dashboard',
-                              arguments: (route) => false);
-                          setState(() {
-                            key = "dashboard";
-                          });
-                        },
-                        color: key == "dashboard" ? primaryColor : black,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      drawerEnableOpenDragGesture: false,
+      body: _buildBody(),
+      bottomNavigationBar: BottomAppBar(
+        notchMargin: 6.0,
+        // shape: const CircularNotchedRectangle(),
+        color: Color(0xffF6FAFE),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 50.w),
+          height: 79.h,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Builder(builder: (context) {
+                return Stack(
+                  alignment: Alignment.topLeft,
+                  children: [
+                    if (key == "dashboard")
+                      Container(
+                        height: 2.h,
+                        width: 36.w,
+                        color: primaryColor,
                       ),
-                    ],
-                  );
-                }),
-                Builder(builder: (context) {
-                  return Stack(
-                    alignment: Alignment.topCenter,
-                    children: [
-                      if (key == "recent")
-                        Container(
-                          height: 2.h,
-                          width: 36.w,
-                          color: primaryColor,
-                        ),
-                      CustomNavItem(
-                        icon: key == "recent"
-                            ? "assets/image/svg/recentFill.svg"
-                            : "assets/image/svg/recent.svg",
-                        label: 'Recent',
-                        onTap: () {
-                          setState(() {
-                            key = "recent";
-                          });
-                          firstKey.currentState!.pushNamed('/recent',
-                              arguments: (route) => false);
-                        },
-                        color: key == "recent" ? primaryColor : black,
+                    CustomNavItem(
+                      icon: key == "dashboard"
+                          ? "assets/image/svg/home.svg"
+                          : "assets/image/svg/unfillhome.svg",
+                      label: 'Home',
+                      onTap: () {
+                        firstKey.currentState!.pushNamed('/dashboard',
+                            arguments: (route) => false);
+                        setState(() {
+                          key = "dashboard";
+                        });
+                      },
+                      color: key == "dashboard" ? primaryColor : black,
+                    ),
+                  ],
+                );
+              }),
+              Builder(builder: (context) {
+                return Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    if (key == "recent")
+                      Container(
+                        height: 2.h,
+                        width: 36.w,
+                        color: primaryColor,
                       ),
-                    ],
-                  );
-                }),
-                Builder(builder: (context) {
-                  return Stack(
-                    alignment: Alignment.topRight,
-                    children: [
-                      if (key == "profile")
-                        Container(
-                          height: 2.h,
-                          width: 36.w,
-                          color: primaryColor,
-                        ),
-                      CustomNavItem(
-                        icon: "assets/image/svg/profile.svg",
-                        label: 'Profile',
-                        onTap: () {
-                          setState(() {
-                            key = "profile";
-                          });
-                          firstKey.currentState!.pushNamed('/profile',
-                              arguments: (route) => false);
-                        },
-                        color: key == "profile" ? primaryColor : black,
+                    CustomNavItem(
+                      icon: key == "recent"
+                          ? "assets/image/svg/recentFill.svg"
+                          : "assets/image/svg/recent.svg",
+                      label: 'Recent',
+                      onTap: () {
+                        setState(() {
+                          key = "recent";
+                        });
+                        firstKey.currentState!
+                            .pushNamed('/recent', arguments: (route) => false);
+                      },
+                      color: key == "recent" ? primaryColor : black,
+                    ),
+                  ],
+                );
+              }),
+              Builder(builder: (context) {
+                return Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    if (key == "profile")
+                      Container(
+                        height: 2.h,
+                        width: 36.w,
+                        color: primaryColor,
                       ),
-                    ],
-                  );
-                }),
-              ],
-            ),
+                    CustomNavItem(
+                      icon: "assets/image/svg/profile.svg",
+                      label: 'Profile',
+                      onTap: () {
+                        setState(() {
+                          key = "profile";
+                        });
+                        firstKey.currentState!
+                            .pushNamed('/profile', arguments: (route) => false);
+                      },
+                      color: key == "profile" ? primaryColor : black,
+                    ),
+                  ],
+                );
+              }),
+            ],
           ),
         ),
       ),
