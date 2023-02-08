@@ -109,23 +109,20 @@ class Profile extends StatelessWidget {
               ),
               ySize(12),
               ProfileCard(
-                onTap: () => navigate(context, Notifications()),
+                onTap: () => navigate(context, const Notifications()),
                 svg: 'notification',
                 text: 'Notifications',
               ),
               ySize(12),
               ProfileCard(
-                onTap: () => navigate(context, ContactUs()),
+                onTap: () => navigate(context, const ContactUs()),
                 svg: 'call',
                 text: 'Contact Us',
               ),
               ySize(12),
               ProfileCard(
-                onTap: () => Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()),
-                    (route) => false),
+                onTap: () =>
+                    Navigator.popUntil(context, ModalRoute.withName('/login')),
                 svg: 'sign_out',
                 text: 'Sign Out',
               ),

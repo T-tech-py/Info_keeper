@@ -39,7 +39,7 @@ class Recent extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.only(top: 42.h),
           child: GridView.builder(
-              itemCount: 5,
+              itemCount: 15,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: 10.0,
